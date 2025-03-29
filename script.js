@@ -52,13 +52,13 @@ function displayWelcomeMessage() {
 
 async function checkBackendConnection() {
     try {
-        const response = await fetch('http://localhost:5000/api/health');
+        const response = await fetch('/api/health');
         if (!response.ok) {
-            showError('Backend server is not responding properly. Please ensure it is running.');
+            showError('Backend server is not responding properly. Check Vercel logs.');
         }
     } catch (error) {
         console.error('Backend connection error:', error);
-        showError('Cannot connect to backend server. Please ensure it is running at http://localhost:5000');
+        showError('Cannot connect to backend API. Check Vercel logs.');
     }
 }
 
@@ -119,7 +119,7 @@ async function handleSubmit(event) {
 
 async function makeApiCall(requestData) {
     try {
-        const response = await fetch('http://localhost:5000/api/solve', {
+        const response = await fetch('/api/solve', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
