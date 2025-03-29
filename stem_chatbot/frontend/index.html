@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM Learning Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-robot"></i> STEM Learning Assistant</h1>
+            <p>Your personal AI tutor for science, technology, engineering, and math</p>
+        </header>
+        
+        <main>
+            <div class="chat-container">
+                <div class="chat-history">
+                    <!-- Chat messages will be added here dynamically -->
+                </div>
+                
+                <div class="input-container">
+                    <form id="message-form">
+                        <div class="text-input-container">
+                            <textarea 
+                                id="message-input" 
+                                placeholder="Ask a STEM question, describe a problem, or upload an image..." 
+                                rows="3"></textarea>
+                        </div>
+                        
+                        <div class="image-container">
+                            <div class="image-preview-container hidden">
+                                <img id="image-preview" alt="Image preview">
+                                <button type="button" id="remove-image" aria-label="Remove image">×</button>
+                            </div>
+                            
+                            <div class="upload-controls">
+                                <label for="image-input" class="upload-btn">
+                                    <i class="fas fa-image"></i> Attach Image
+                                    <input type="file" id="image-input" accept="image/*" style="display: none;">
+                                </label>
+                                
+                                <button type="submit" id="submit-btn" disabled>
+                                    <i class="fas fa-paper-plane"></i> Send
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2023 STEM Learning Assistant | Powered by AI</p>
+        </footer>
+    </div>
+    
+    <div class="loading-indicator hidden">
+        <div class="spinner"></div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
