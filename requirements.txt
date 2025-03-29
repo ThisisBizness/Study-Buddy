@@ -3,4 +3,5 @@ python-dotenv>=0.19
 google-generativeai>=0.4
 Flask-Cors>=3.0
 requests
-Pillow 
+Pillow
+gunicorn 
