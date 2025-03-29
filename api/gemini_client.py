@@ -42,8 +42,8 @@ def initialize_gemini(api_key: str, model_name: str) -> None:
 def generate_stem_response(
     problem_text: Optional[str] = None, 
     image_data_base64: Optional[str] = None,
-    temperature: float = 0.2,
-    max_tokens: int = 2048
+    temperature: float = 1,
+    max_tokens: int = 65536
 ) -> Dict[str, Any]:
     """
     Generate a STEM problem solution using the Gemini model.
