@@ -67,7 +67,7 @@ CORS(app)
 if not mock_mode:
     try:
         # Import here to potentially avoid issues if gemini client fails
-        from gemini_client import initialize_gemini
+        from .gemini_client import initialize_gemini
         initialize_gemini(api_key=api_key, model_name=model_name)
     except ImportError:
         logger.critical("CRITICAL: Could not import gemini_client.py. Ensure the file exists and has no syntax errors.", exc_info=True)
@@ -198,18 +198,20 @@ def handle_solve() -> Tuple[Response, int]:
         else:
             # Import here only if needed and not in mock mode
             try:
-                from gemini_client import generate_stem_response
+                from .gemini_client import generate_stem_response
+                logger.debug("Calling generate_stem_response")
+                result = generate_stem_response(
+                    problem_text=text_problem,
+                    image_data_base64=image_data,
+                    temperature=temperature,
+                    max_tokens=max_tokens
+                )
             except ImportError:
-                 logger.error("Failed to import generate_stem_response from gemini_client.", exc_info=True)
-                 return jsonify({"error": "Server configuration error", "details": "Could not load Gemini client."}), 500
-
-            logger.debug(f"Calling generate_stem_response with temp={temperature}, max_tokens={max_tokens}")
-            result = generate_stem_response(
-                problem_text=text_problem,
-                image_data_base64=image_data,
-                temperature=temperature,
-                max_tokens=max_tokens
-            )
+                logger.error("Failed to import generate_stem_response from gemini_client.", exc_info=True)
+                return jsonify({"error": "Could not load Gemini client."}), 500 # Send error to frontend
+            except Exception as e: # Catch errors during generation
+                logger.error(f"Error in generate_stem_response: {str(e)}", exc_info=True)
+                return jsonify({"error": "An internal server error occurred", "details": "An unexpected error occurred while processing the request."}), 500
         
         # Check for errors returned from the client function
         if result and isinstance(result, dict) and "error" in result:
